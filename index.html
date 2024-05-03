@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>My Website Home Page</title>
+  </head>
+  <script type="text/javascript">
+    // Make API call to AWS lambda function
+    var apiUrl =
+      "https://s9vi53lljj.execute-api.us-east-2.amazonaws.com/default/neuro140GetLimericks";
+    fetch(apiUrl)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        // Display the chosen limerick to the user
+        console.log(data);
+        document.getElementById("limerick1").innerHTML = data[0].limerick;
+        document.getElementById("limerick2").innerHTML = data[1].limerick;
+        document.getElementById("limerick3").innerHTML = data[2].limerick;
+        document.getElementById("limerick4").innerHTML = data[3].limerick;
+        document.getElementById("uniqueId").innerHTML = `${data[0].class}${data[1].class}${data[2].class}${data[3].class}:${data[4]}:${data[5]}:${data[6]}:${data[7]}`
+      })
+      .catch((err) => {
+      });
+  </script>
+  <body>
+    <h1>Your Unique Id:</h1>
+    <h3 id="uniqueId"></h3>
+    <h1>Your four limericks:</h1>
+    <h3>Limerick 1:</h3>
+    <p id="limerick1"></p>
+    </br>
+    <h3>Limerick 2:</h3>
+    <p id="limerick2"></p>
+    </br>
+    <h3>Limerick 3:</h3>
+    <p id="limerick3"></p>
+    </br>
+    <h3>Limerick 4:</h3>
+    <p id="limerick4"></p>
+    </br>
+  </body>
+</html>
